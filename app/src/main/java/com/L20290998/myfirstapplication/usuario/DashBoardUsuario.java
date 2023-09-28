@@ -1,9 +1,12 @@
 package com.L20290998.myfirstapplication.usuario;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,13 +73,52 @@ public class DashBoardUsuario extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        ur = UsuarioRepository.getInstance();
+        //Esta es la manera en que recibimos info de otro activiti
+        String usuario =getIntent().getStringExtra("Usuario");
+        String pass =getIntent().getStringExtra("pass");
+
+        //Obtenemos info de el usuario logeado
+        userInfo = ur.getRegisteredUsers().get(usuario).get(pass);
         if(item.getItemId() == R.id.miBorrar){
-            Toast.makeText(this,"borrar",Toast.LENGTH_LONG).show();
+            this.createAlertDialog("Borrar","¿Seguro que deseas borrar?", true).show(); //refactorizar
         } else if (item.getItemId() == R.id.miInfo) {
+            String tvUs = userInfo.getUsuario();
+            String tvEd = userInfo.getEdad();
+            String tvName= userInfo.getNombre();
+            String tvEmail = userInfo.getEmail();
+            String txt = "Usuario: %s, Edad: %s, Nombre: %s, Email: %s";
+            String info = String.format(txt,tvUs,tvEd,tvName,tvEmail);
+            this.createAlertDialog("Info",info, false).show(); //refactorizar
             Toast.makeText(this,"info",Toast.LENGTH_LONG).show();
-        } else if (item.getItemId() == R.id.miInfo) {
-            Toast.makeText(this,"Settings",Toast.LENGTH_LONG).show();
+        } else if (item.getItemId() == R.id.miSetting) {
+            String message = ("Abriste configuraciones");
+            Toast.makeText(this,message,Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private AlertDialog createAlertDialog (String title, String message,boolean yn) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+        //Los mutables son aquellos que cuando accedemos son los que podemos editar su valor, los inmutables son los que no nos dejan cambiar su valor, string is inmutable
+        builder.setTitle(title)
+                .setMessage(message);
+        if(yn == true) {
+            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    //código Java si se ha pulsado sí
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    //código java si se ha pulsado no
+                }
+            });
+        }
+
+
+        return builder.create();
     }
 }
