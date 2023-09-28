@@ -1,12 +1,16 @@
 package com.L20290998.myfirstapplication.usuario;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.L20290998.myfirstapplication.R;
 import com.L20290998.myfirstapplication.usuario.model.Usuario;
@@ -18,6 +22,8 @@ public class DashBoardUsuario extends AppCompatActivity {
     private UsuarioRepository ur;
     private Usuario userInfo;
     TextView tvUsr;
+
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +55,28 @@ public class DashBoardUsuario extends AppCompatActivity {
          tvName.setText(userInfo.getNombre());
          tvEmail.setText(userInfo.getEmail());
 
-         
-        /*
-        @Override
-         public boolean onCreateOptionsMenu(Menu menu){
+         toolbar = findViewById(R.id.toolbar2);
 
-            Toolbar toolbar = findViewById(R.id.toolbar2);
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.tolbar_menu,menu);
-            return super.onCreateOptionsMenu(menu);
+         setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        toolbar = findViewById(R.id.toolbar2);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.tolbar_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.miBorrar){
+            Toast.makeText(this,"borrar",Toast.LENGTH_LONG).show();
+        } else if (item.getItemId() == R.id.miInfo) {
+            Toast.makeText(this,"info",Toast.LENGTH_LONG).show();
+        } else if (item.getItemId() == R.id.miInfo) {
+            Toast.makeText(this,"Settings",Toast.LENGTH_LONG).show();
         }
-
-         */
-
+        return super.onOptionsItemSelected(item);
     }
 }
