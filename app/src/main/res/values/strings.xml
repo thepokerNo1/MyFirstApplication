@@ -5,6 +5,10 @@
     <string name="tvPass">Contraseña</string>
     <string name="tvInfo">Informacion Usuario</string>
     <string name="tvUs">Informacion Usuario</string>
+    <string name="tvNombre">Nombre: </string>
+    <string name="tvEdad">Edad: </string>
+    <string name="tvEmail">Email: </string>
+    <string name="tvPassw">Contraseña: </string>
 
     <string name="etUsuarioHint">Ingrese Usuario</string>
     <string name="etPassHint">Ingrese Contraseña</string>

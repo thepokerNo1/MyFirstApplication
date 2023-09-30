@@ -44,14 +44,11 @@ public class DashBoardUsuario extends AppCompatActivity {
         userInfo = ur.getRegisteredUsers().get(usuario).get(pass);
 
         TextView tvUs = findViewById(R.id.tvUsr);
-        TextView tvPs = findViewById(R.id.tvPs);
         TextView tvEd = findViewById(R.id.tvEdad);
         TextView tvEmail = findViewById(R.id.tvEmail);
         TextView tvName = findViewById(R.id.tvName);
 
          tvUs.setText(userInfo.getUsuario());
-
-         tvPs.setText(userInfo.getPass());
 
          tvEd.setText(userInfo.getEdad());
 
